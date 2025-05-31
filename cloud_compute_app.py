@@ -7,13 +7,13 @@ from azure.storage.blob import BlobClient
 cloud_app = FastAPI()
 
 @cloud_app.get("/compute/average/")
-def compute_average():
+def compute_average(column: str = "value"):
     context = ts.context_from(open("context.tenseal", "rb").read())
     
     blob = BlobClient.from_connection_string(
         conn_str=os.getenv("AZURE_STORAGE_CONNECTION_STRING"),
         container_name="encrypted-data",
-        blob_name="data.bin"
+        blob_name=f"{column}.bin"
     )
     downloaded = blob.download_blob().readall()
 
