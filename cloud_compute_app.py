@@ -13,7 +13,7 @@ def compute_average():
     blob = BlobClient.from_connection_string(
         conn_str=os.getenv("AZURE_STORAGE_CONNECTION_STRING"),
         container_name="encrypted-data",
-        blob_name="bp.bin"
+        blob_name="data.bin"
     )
     downloaded = blob.download_blob().readall()
 
